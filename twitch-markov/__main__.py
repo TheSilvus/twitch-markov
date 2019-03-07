@@ -137,6 +137,8 @@ class TwitchConnection:
                 self.join(user_name)
                 await asyncio.sleep(1)
 
+            LOG.info("Finished joining; now in {} channels".format(len(self.joined)))
+
             await asyncio.sleep(60)
 
 
