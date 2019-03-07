@@ -110,7 +110,7 @@ class TwitchConnection:
             LOG.info("Inserting {} messages".format(message_count))
 
             async with self.database.cursor() as cursor:
-                sql = "INSERT INTO Messages (time, channel, sender, message) VALUES " + ",".join(["(%s, %s, %s, %s)"] * message_count) + ";"
+                sql = "INSERT INTO Messages (time, sender, channel, message) VALUES " + ",".join(["(%s, %s, %s, %s)"] * message_count) + ";"
 
                 await cursor.execute(sql, messages)
             await self.database.commit()
