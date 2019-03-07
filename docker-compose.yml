@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    twitch-markov:
+        build:
+            context: .
+        volumes:
+            - "./:/app/"
+        environment:
+            MYSQL_HOST: mysql
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_DATABASE: markov
+
+            TWITCH_BOT_USER: thesilvus
+            TWITCH_BOT_TOKEN: oauth:09yuzcub2vgu56f93dpx233nszsk3j
+            TWITCH_CLIENT_ID: z1ak9t4e5zgoht4mel7s8u1h5gkdrf
+        env_file: 
+            - twitch.env
+    mysql:
+        image: mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: markov
+        volumes:
+            - "./mysql-data:/var/lib/mysql"
+    sh:
+        image: alpine:latest
+        command: ["sleep", "36000000"]
