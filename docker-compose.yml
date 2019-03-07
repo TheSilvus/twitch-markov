@@ -18,12 +18,12 @@ services:
         env_file: 
             - twitch.env
     mysql:
-        image: mariadb
+        image: linuxserver/mariadb
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: markov
         volumes:
-            - "./mysql-data:/var/lib/mysql"
+            - "./mysql-data:/config"
     sh:
         image: alpine:latest
         command: ["sleep", "36000000"]

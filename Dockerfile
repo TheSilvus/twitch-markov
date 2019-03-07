@@ -7,4 +7,4 @@ RUN apk --no-cache add python3 openssl && \
         apk del install_deps
 
 WORKDIR /app
-CMD ["sh", "-c", "sleep 3 && python3 -u -m twitch-markov"]
+CMD ["sh", "-c", "sleep 10 && python3 -u -m twitch-markov"]
