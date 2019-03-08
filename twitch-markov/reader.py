@@ -129,12 +129,21 @@ class TwitchConnection:
 
                 user_names = [stream["login"] for stream in content["data"]]
 
+            user_names = set(user_names)
+            leaving = self.joined - user_names
+
+            # TODO at the end always in 99 channels; why?
 
             for user_name in user_names:
                 if user_name in self.joined:
                     continue
                 LOG.info("Joining {}".format(user_name))
                 self.join(user_name)
+                await asyncio.sleep(1)
+
+            for user_name in leaving:
+                LOG.info("Leaving {}".format(user_name))
+                self.part(user_name)
                 await asyncio.sleep(1)
 
             LOG.info("Finished joining; now in {} channels".format(len(self.joined)))
