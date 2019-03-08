@@ -62,7 +62,7 @@ class TwitchConnection:
 
     async def receive(self):
         line = await self.reader.readline()
-        line = line.decode()[:-1]
+        line = line.decode().strip()
         LOG.debug("< {}".format(line))
         return line
 
